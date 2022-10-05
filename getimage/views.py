@@ -42,6 +42,7 @@ def image(request):
     else:
         data_json = json.loads(response.read())
         iiif_manifest = data_json["sequences"][0]['canvases'][0]["images"][0]["resource"]["@id"]
+        license = data_json["sequences"][0]['canvases'][0]['images'][0]['license']
         label = data_json["label"]['@value']
         if 'stam' in manifest:
             instelling = 'STAM'
@@ -53,6 +54,6 @@ def image(request):
             instelling = 'Industriemuseum'
         else:
             instelling = 'Archief Gent'
-        return render(request, 'image.html', {'iiif_manifest': iiif_manifest, 'instelling': instelling, 'label': label})
+        return render(request, 'image.html', {'iiif_manifest': iiif_manifest, 'instelling': instelling, 'label': label, 'license': license})
 
 # Create your views here.
